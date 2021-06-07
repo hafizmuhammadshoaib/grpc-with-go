@@ -48,7 +48,7 @@ func main() {
 	}
 	log.Println(r.GetMessage())
 
-	reply, errInGet := c.GetUserById(ctx, &userProto.UserGetRequest{Id: 3})
+	reply, errInGet := c.GetUserById(ctx, &userProto.UserGetRequest{Id: 1})
 	if errInGet != nil {
 		log.Fatalf("could not greet: %v", err)
 	}

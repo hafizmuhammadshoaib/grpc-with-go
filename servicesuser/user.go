@@ -1,6 +1,8 @@
 package servicesuser
 
 import (
+	"fmt"
+
 	"example.com/grpc_with_go/models"
 	repositories "example.com/grpc_with_go/repositories"
 	userProto "example.com/grpc_with_go/userproto"
@@ -18,5 +20,9 @@ func (s *Server) CreateUser(ctx context.Context, in *userProto.UserCreateRequest
 
 func (s *Server) GetUserById(ctx context.Context, in *userProto.UserGetRequest) (*userProto.UserGetReply, error) {
 	user, err := repositories.Mgr.GetByID(&models.User{Id: in.GetId()})
+	if err != nil {
+		fmt.Println("failed to get user")
+		return nil, err
+	}
 	return &userProto.UserGetReply{Name: user.Name, Email: user.Email}, err
 }
